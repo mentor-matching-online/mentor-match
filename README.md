@@ -8,15 +8,12 @@ It uses [this package](https://github.com/jonodrew/mentor-match-package) to calc
 
 This service is free and open source. It welcomes pull requests, feature suggestions, improvements to grammar, spelling, or any other way folks want to help.
 
-Our roadmap is hosted [here on GitHub](https://github.com/users/jonodrew/projects/1). Make feature suggestions by
-raising an issue on this repo.
+Our roadmap is hosted [here on GitHub](https://github.com/users/jonodrew/projects/1). Make feature suggestions by raising an issue on this repo.
 
 ## Architecture
 This service has three main parts: a web server, running Flask; a Celery worker; and a Redis instance. The long-running task of matching mentors and mentees is passed off to the Celery worker via Redis, which acts as the broker. Results are also stored in Redis and retrieved by the Flask app as needed.
 
 The Flask app is very basic: mostly HTML and basic routes, with a smidgeon of javascript to keep the user interested in what's happening while they wait for their results. That needs some work **so pull requests are welcome**.
-
-Docs are served with Jekyll.
 
 ## Setup
 
@@ -33,7 +30,6 @@ By default, the service can be accessed on the following ports:
 |---------|------|
 | flask   | 5001 |
 | redis   | 6379 |
-| docs    | 4000 |
 
 ## Installing dependencies
 
@@ -51,8 +47,7 @@ From the repository folder, in the command line run:
 docker-compose up
 ```
 
-You should now be able to access the service on the `localhost:` followed by the ports above. I recommend starting
-with [the docs](localhost:4000), so you can come back here and keep going!
+You should now be able to access the service on the `localhost:` followed by the ports above. 
 
 To stop the service at any time, just press the control (<kbd>Ctrl</kbd>) key and <kbd>C</kbd> key together.
 
