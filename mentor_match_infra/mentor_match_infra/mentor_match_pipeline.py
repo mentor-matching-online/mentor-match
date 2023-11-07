@@ -1,5 +1,4 @@
 from aws_cdk import Stack, Environment
-from aws_cdk.aws_secretsmanager import Secret
 from aws_cdk.pipelines import (
     CodePipeline,
     ShellStep,
@@ -22,12 +21,11 @@ class MentorMatchPipeline(Stack):
             cross_account_keys=True,
             synth=ShellStep(
                 "Synth",
-                input=CodePipelineSource.git_hub(
+                input=CodePipelineSource.connection(
                     "mentor-matching-online/mentor-match",
-                    "main",
-                    authentication=Secret.from_secret_name_v2(
-                        self, "SecretGetter", "github-token"
-                    ).secret_value,
+                    branch="main",
+                    connection_arn="arn:aws:codestar-connections:eu-west-2:661101848753:connection/99c2d217-1c7c-4ff5-9769-eebe35880557",  # noqa
+                    action_name="github_source",
                 ),
                 commands=[
                     "npm install -g aws-cdk",
