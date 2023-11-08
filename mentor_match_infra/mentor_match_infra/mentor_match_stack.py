@@ -87,6 +87,7 @@ class MentorMatchWebStack(cdk.Stack):
         construct_id: str,
         image_tag: str = "latest",
         debug: bool = False,
+        iterations: int = 2,
         **kwargs,
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
@@ -139,7 +140,7 @@ class MentorMatchWebStack(cdk.Stack):
                 f"ghcr.io/mentor-matching-online/mentor-match/worker:{image_tag}"
             ),
             container_name="worker",
-            environment=broker_vars,
+            environment={**broker_vars, "ITERATIONS": str(iterations)},
             logging=ecs.AwsLogDriver(
                 stream_prefix="celery", mode=ecs.AwsLogDriverMode.NON_BLOCKING
             ),
