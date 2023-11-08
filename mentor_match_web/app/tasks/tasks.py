@@ -25,7 +25,8 @@ def async_process_data(
     mentees,
     unmatched_bonus: int = 6,
 ) -> Tuple[List[CSMentor], List[CSMentee], int]:
-    all_rules = [base_rules() for _ in range(3)]
+    iterations = int(os.environ.get("ITERATIONS", 3))
+    all_rules = [base_rules() for _ in range(iterations)]
     for ruleset in all_rules:
         ruleset.append(UnmatchedBonus(unmatched_bonus))
     matched_mentors, matched_mentees = process.process_data(
